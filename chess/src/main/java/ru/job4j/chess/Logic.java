@@ -21,6 +21,13 @@ public final class Logic {
     }
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
+        for(Figure fig: figures) {
+            for(Cell cl: steps){
+                if ((cl.getX() == fig.position().getX()) && (cl.getY() == fig.position().getY())) {
+                    throw  new OccupiedCellException("Ошибка, есть занятые клетки : " + fig.position());
+                }
+            }
+        }
         return true;
     }
 
@@ -36,6 +43,6 @@ public final class Logic {
                 return index;
             }
         }
-        throw new FigureNotFoundException();
+        throw new FigureNotFoundException("Figure not found!");
     }
 }
